@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "typewriter4react-native_example",
+    "slug": "typewriter4react-native_example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "typewriter4reactnative.example"
+    },
+    "android": {
+      "edgeToEdgeEnabled": true,
+      "package": "typewriter4reactnative.example"
+    }
+  }
+}
