@@ -170,7 +170,7 @@ const Typewriter = ({
             opacity: 1,
             position: reserveSpace ? 'absolute' : 'relative',
             width: '100%',
-            height: reserveSpace ? '100%' : 'auto',
+            height: reserveSpace ? '105%' : 'auto',
           }}
         >
           <Text style={[{ lineHeight: lineHeight, color: 'black' }, textStyle]}>
