@@ -3,14 +3,18 @@ import {
   Animated,
   type ColorValue,
   type StyleProp,
+  StyleSheet,
   Text,
+  type TextStyle,
   View,
   type ViewStyle,
 } from 'react-native';
 
+type CursorStyle = { color: ColorValue };
+
 const CURSOR_BLINK_VALUE = 200;
 
-const speedValues = {
+const SPEED_VALUES = {
   slow: 150,
   medium: 125,
   fast: 100,
@@ -18,17 +22,21 @@ const speedValues = {
   fastest: 55,
 };
 
+const DEFAULT_STYLES = StyleSheet.create({
+  text: {
+    fontSize: 14,
+    lineHeight: 1.1,
+    color: 'black',
+  },
+});
+
 interface TypewriterTextProps {
   text: string;
   className?: string;
-  style?: StyleProp<ViewStyle>;
-  speed?: keyof typeof speedValues;
-  size?: number;
-  textColor?: ColorValue;
-  cursorColor?: ColorValue;
-  fontFamily?: string;
-  letterSpacing?: number;
-  lineHeight?: number;
+  textStyle?: StyleProp<TextStyle>;
+  cursorStyle?: CursorStyle;
+  containerStyle?: StyleProp<ViewStyle>;
+  speed?: keyof typeof SPEED_VALUES;
   hideCursorOnFinish?: boolean;
   showOverflow?: boolean;
   isActive?: boolean;
@@ -40,22 +48,23 @@ interface TypewriterTextProps {
 
 const Typewriter = ({
   text = '',
-  style,
+  textStyle = DEFAULT_STYLES.text,
+  cursorStyle,
+  containerStyle,
   speed = 'fast',
-  size = 30,
-  textColor,
-  cursorColor,
-  fontFamily = '',
-  letterSpacing,
-  lineHeight = 1.1,
   hideCursorOnFinish = true,
-  showOverflow = false,
   isActive = true,
   delaySeconds,
   cursorDisappearDelay = 2000, // Default: cursor disappears after 2 seconds
   reserveSpace = true, // title it "mode" maybe?
   onFinish,
 }: TypewriterTextProps) => {
+  const flatTextStyle = StyleSheet.flatten(textStyle);
+  const { fontSize, lineHeight } = flatTextStyle;
+  const textColor = flatTextStyle.color ?? 'black';
+
+  const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
+
   const [displayedText, setDisplayedText] = useState('');
   const [charIndex, setCharIndex] = useState(0);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -79,8 +88,6 @@ const Typewriter = ({
     );
     cursorBlinkAnimation.current.start();
   };
-
-  const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
 
   useEffect(() => {
     if (!typingFinished) {
@@ -120,9 +127,10 @@ const Typewriter = ({
     if (isActive && !isWaiting && charIndex < text.length) {
       const typingSpeed =
         Math.floor(
-          Math.random() * (speedValues[speed] - (speedValues[speed] - 100) + 1)
+          Math.random() *
+            (SPEED_VALUES[speed] - (SPEED_VALUES[speed] - 100) + 1)
         ) +
-        (speedValues[speed] - 100);
+        (SPEED_VALUES[speed] - 100);
 
       const typingTimeout = setTimeout(() => {
         setDisplayedText(text.slice(0, charIndex + 1));
@@ -138,56 +146,47 @@ const Typewriter = ({
 
   return (
     <View>
+      {/* container 1 */}
       <View
         style={[
           {
             position: 'relative',
             justifyContent: 'center',
             alignItems: 'center',
-            overflow: showOverflow ? 'visible' : 'hidden',
           },
-          style,
+          containerStyle,
         ]}
       >
+        {/* Opaque, absolute-positioned text component that isn't 
+        visible but takes-up space even before the animation runs */}
         {reserveSpace && (
-          <Text
-            style={{
-              fontFamily: fontFamily,
-              fontSize: size,
-              opacity: 0,
-              letterSpacing: letterSpacing,
-              lineHeight: size * lineHeight,
-            }}
-          >
-            {text}
-          </Text>
+          <View style={{ opacity: 0 }}>
+            <Text style={[textStyle]}>{text}</Text>
+          </View>
         )}
+        {/* Animated Text Container */}
         <View
           style={{
+            opacity: 1,
             position: reserveSpace ? 'absolute' : 'relative',
             width: '100%',
             height: reserveSpace ? '100%' : 'auto',
           }}
         >
-          <Text
-            style={{
-              fontFamily: fontFamily,
-              color: textColor,
-              fontSize: size,
-              letterSpacing: letterSpacing,
-              lineHeight: size * lineHeight,
-            }}
-          >
+          <Text style={[{ lineHeight: lineHeight, color: 'black' }, textStyle]}>
             {displayedText}
+            {/* cursor element */}
             {!typingFinished || hideCursorOnFinish ? (
               <Animated.View
                 style={{
-                  width: size / 4,
-                  height: size,
-                  transform: [{ translateX: size / 2 }],
-                  marginBottom: lineHeight * 2.25 * lineHeight - lineHeight,
+                  width: fontSize! / 4,
+                  height: fontSize,
+                  transform: [{ translateX: fontSize! / 2 }],
+                  marginBottom: lineHeight! * 2.25 * lineHeight! - lineHeight!,
                   opacity: cursorOpacity,
-                  backgroundColor: cursorColor || textColor,
+                  backgroundColor: cursorStyle?.color
+                    ? cursorStyle.color
+                    : textColor,
                 }}
               />
             ) : null}

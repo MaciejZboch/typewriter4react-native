@@ -5,8 +5,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Typewriter
-        text="lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet"
-        reserveSpace={false}
+        text="lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet dolor dolor dolor sit ame tttt"
+        reserveSpace={true}
+        textStyle={{ fontSize: 24 }}
       />
       <View
         style={{
