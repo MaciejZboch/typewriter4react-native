@@ -12,8 +12,6 @@ import {
 
 type CursorStyle = { color: ColorValue };
 
-const CURSOR_BLINK_VALUE = 200;
-
 const SPEED_VALUES = {
   slow: 150,
   medium: 125,
@@ -42,6 +40,7 @@ interface TypewriterTextProps {
   isActive?: boolean;
   delaySeconds?: number;
   cursorDisappearDelay?: number; // New: Controls how long cursor stays after text finishes
+  cursorBlinkTime?: number;
   onFinish?: () => void;
   reserveSpace?: boolean;
 }
@@ -56,6 +55,7 @@ const Typewriter = ({
   isActive = true,
   delaySeconds,
   cursorDisappearDelay = 2000, // Default: cursor disappears after 2 seconds
+  cursorBlinkTime = 200,
   reserveSpace = true, // title it "mode" maybe?
   onFinish,
 }: TypewriterTextProps) => {
@@ -76,12 +76,12 @@ const Typewriter = ({
       Animated.sequence([
         Animated.timing(cursorOpacity, {
           toValue: 0,
-          duration: CURSOR_BLINK_VALUE,
+          duration: cursorBlinkTime,
           useNativeDriver: true,
         }),
         Animated.timing(cursorOpacity, {
           toValue: 1,
-          duration: CURSOR_BLINK_VALUE,
+          duration: cursorBlinkTime,
           useNativeDriver: true,
         }),
       ])
@@ -103,7 +103,7 @@ const Typewriter = ({
         }
         Animated.timing(cursorOpacity, {
           toValue: 0,
-          duration: CURSOR_BLINK_VALUE,
+          duration: cursorBlinkTime,
           useNativeDriver: true,
         }).start();
       };
