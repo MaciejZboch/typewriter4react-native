@@ -19,11 +19,11 @@ const SPEED_VALUES = {
   very_fast: 75,
   fastest: 55,
 };
-
+const DEFAULT_FONTSIZE_VALUE = 20;
 const DEFAULT_STYLES = StyleSheet.create({
   text: {
-    fontSize: 14,
-    lineHeight: 1.1,
+    fontSize: DEFAULT_FONTSIZE_VALUE,
+    lineHeight: DEFAULT_FONTSIZE_VALUE * 1.2,
     color: 'black',
   },
 });
@@ -48,22 +48,22 @@ interface TypewriterTextProps {
 
 const Typewriter = ({
   text = '',
-  textStyle = DEFAULT_STYLES.text,
+  textStyle,
   cursorStyle,
   containerStyle,
   speed = 'fast',
   hideCursorOnFinish = true,
   isActive = true,
   delayMs,
-  cursorDisappearDelay = 2000, // Default: cursor disappears after 2 seconds
+  cursorDisappearDelay = 2000, // default: cursor disappears after 2 seconds
   cursorBlinkTime = 200,
   reserveSpace = true, // title it "mode" maybe?
   backwards = false,
   onFinish,
 }: TypewriterTextProps) => {
-  const flatTextStyle = StyleSheet.flatten(textStyle);
+  const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
   const { fontSize, lineHeight } = flatTextStyle;
-  const textColor = flatTextStyle.color ?? 'black';
+  const textColor = flatTextStyle.color;
 
   const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
 
@@ -179,7 +179,7 @@ const Typewriter = ({
         visible but takes-up space even before the animation runs */}
         {reserveSpace && (
           <View style={{ opacity: 0 }}>
-            <Text style={[textStyle]}>{text}</Text>
+            <Text style={[DEFAULT_STYLES.text, textStyle]}>{text}</Text>
           </View>
         )}
         {/* Animated Text Container */}
@@ -191,7 +191,7 @@ const Typewriter = ({
             height: reserveSpace ? '105%' : 'auto',
           }}
         >
-          <Text style={[{ lineHeight: lineHeight, color: 'black' }, textStyle]}>
+          <Text style={[DEFAULT_STYLES.text, textStyle]}>
             {displayedText}
             {/* cursor element */}
             {!typingFinished || hideCursorOnFinish ? (
@@ -199,7 +199,7 @@ const Typewriter = ({
                 style={{
                   width: fontSize! / 4,
                   height: fontSize,
-                  transform: [{ translateX: fontSize! / 2 }],
+                  transform: [{ translateX: fontSize! / 3 }],
                   marginBottom: lineHeight! * 2.25 * lineHeight! - lineHeight!,
                   opacity: cursorOpacity,
                   backgroundColor: cursorStyle?.color
