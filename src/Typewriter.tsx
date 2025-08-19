@@ -43,6 +43,7 @@ interface TypewriterTextProps {
   cursorBlinkTime?: number;
   onFinish?: () => void;
   reserveSpace?: boolean;
+  backwards?: boolean;
 }
 
 const Typewriter = ({
@@ -57,6 +58,7 @@ const Typewriter = ({
   cursorDisappearDelay = 2000, // Default: cursor disappears after 2 seconds
   cursorBlinkTime = 200,
   reserveSpace = true, // title it "mode" maybe?
+  backwards = false,
   onFinish,
 }: TypewriterTextProps) => {
   const flatTextStyle = StyleSheet.flatten(textStyle);
@@ -65,36 +67,44 @@ const Typewriter = ({
 
   const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
 
-  const [displayedText, setDisplayedText] = useState('');
-  const [charIndex, setCharIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState(!backwards ? '' : text);
+  const [charIndex, setCharIndex] = useState(!backwards ? 0 : text.length);
   const [isWaiting, setIsWaiting] = useState(false);
   const [typingFinished, setTypingFinished] = useState(false);
   const cursorOpacity = useState(new Animated.Value(1))[0];
 
-  const startCursorAnimation = () => {
-    cursorBlinkAnimation.current = Animated.loop(
-      Animated.sequence([
-        Animated.timing(cursorOpacity, {
-          toValue: 0,
-          duration: cursorBlinkTime,
-          useNativeDriver: true,
-        }),
-        Animated.timing(cursorOpacity, {
-          toValue: 1,
-          duration: cursorBlinkTime,
-          useNativeDriver: true,
-        }),
-      ])
-    );
-    cursorBlinkAnimation.current.start();
-  };
+  const typingSpeed =
+    Math.floor(
+      Math.random() * (SPEED_VALUES[speed] - (SPEED_VALUES[speed] - 100) + 1)
+    ) +
+    (SPEED_VALUES[speed] - 100);
 
+  //handle cursors anim start
   useEffect(() => {
+    const startCursorAnimation = () => {
+      cursorBlinkAnimation.current = Animated.loop(
+        Animated.sequence([
+          Animated.timing(cursorOpacity, {
+            toValue: 0,
+            duration: cursorBlinkTime,
+            useNativeDriver: true,
+          }),
+          Animated.timing(cursorOpacity, {
+            toValue: 1,
+            duration: cursorBlinkTime,
+            useNativeDriver: true,
+          }),
+        ])
+      );
+      cursorBlinkAnimation.current.start();
+    };
+
     if (!typingFinished) {
       startCursorAnimation();
     }
   }, [typingFinished]);
 
+  //hamdle cursor anim stop
   useEffect(() => {
     if (typingFinished && hideCursorOnFinish) {
       const fadeOut = () => {
@@ -113,6 +123,7 @@ const Typewriter = ({
     }
   }, [typingFinished]);
 
+  //handle delay
   useEffect(() => {
     if (delayMs) {
       setIsWaiting(true);
@@ -123,26 +134,33 @@ const Typewriter = ({
     }
   }, [delayMs]);
 
+  //handle typing anim
   useEffect(() => {
-    if (isActive && !isWaiting && charIndex < text.length) {
-      const typingSpeed =
-        Math.floor(
-          Math.random() *
-            (SPEED_VALUES[speed] - (SPEED_VALUES[speed] - 100) + 1)
-        ) +
-        (SPEED_VALUES[speed] - 100);
-
+    if (
+      (!backwards && isActive && !isWaiting && charIndex < text.length) ||
+      (backwards && isActive && !isWaiting && charIndex > 0)
+    ) {
       const typingTimeout = setTimeout(() => {
-        setDisplayedText(text.slice(0, charIndex + 1));
-        setCharIndex(charIndex + 1);
+        if (!backwards) {
+          setDisplayedText(text.slice(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else if (backwards) {
+          setDisplayedText(text.slice(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        }
       }, typingSpeed);
 
       return () => clearTimeout(typingTimeout);
-    } else if (charIndex === text.length && !typingFinished) {
+    } else if (
+      (!backwards && charIndex === text.length && !typingFinished) ||
+      (backwards && charIndex === 0 && !typingFinished)
+    ) {
       setTypingFinished(true);
-      if (onFinish) onFinish();
+      if (onFinish) {
+        onFinish();
+      }
     }
-  }, [charIndex, isActive, isWaiting]);
+  }, [charIndex, isActive, isWaiting, backwards]);
 
   return (
     <View>
