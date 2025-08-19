@@ -106,32 +106,36 @@ const Typewriter = ({
 
   //hamdle cursor anim stop
   useEffect(() => {
-    if (typingFinished && hideCursorOnFinish) {
-      const fadeOut = () => {
-        if (cursorBlinkAnimation.current) {
-          cursorBlinkAnimation.current.stop();
-        }
-        Animated.timing(cursorOpacity, {
-          toValue: 0,
-          duration: cursorBlinkTime,
-          useNativeDriver: true,
-        }).start();
-      };
-
-      const timeout = setTimeout(fadeOut, cursorDisappearDelay);
-      return () => clearTimeout(timeout); // Clean up if unmounts
+    if (!(typingFinished && hideCursorOnFinish)) {
+      return;
     }
+
+    const fadeOut = () => {
+      if (cursorBlinkAnimation.current) {
+        cursorBlinkAnimation.current.stop();
+      }
+      Animated.timing(cursorOpacity, {
+        toValue: 0,
+        duration: cursorBlinkTime,
+        useNativeDriver: true,
+      }).start();
+    };
+
+    const timeout = setTimeout(fadeOut, cursorDisappearDelay);
+    return () => clearTimeout(timeout); // Clean up if unmounts
   }, [typingFinished]);
 
   //handle delay
   useEffect(() => {
-    if (delayMs) {
-      setIsWaiting(true);
-      const delayTimeout = setTimeout(() => {
-        setIsWaiting(false);
-      }, delayMs);
-      return () => clearTimeout(delayTimeout);
+    if (!delayMs) {
+      return;
     }
+
+    setIsWaiting(true);
+    const delayTimeout = setTimeout(() => {
+      setIsWaiting(false);
+    }, delayMs);
+    return () => clearTimeout(delayTimeout);
   }, [delayMs]);
 
   //handle typing anim
@@ -160,6 +164,7 @@ const Typewriter = ({
         onFinish();
       }
     }
+    return;
   }, [charIndex, isActive, isWaiting, backwards]);
 
   return (
