@@ -44,8 +44,8 @@ interface TypewriterTextProps {
   onFinish?: () => void;
   reserveSpace?: boolean;
   backwards?: boolean;
-  typingDelay?: number;
-  typingDelayVariance?: number;
+  typingDelayPerChar?: number;
+  typingDelayPerCharVariance?: number;
 }
 
 const Typewriter = ({
@@ -61,8 +61,8 @@ const Typewriter = ({
   cursorBlinkTime = 200,
   reserveSpace = true,
   backwards = false,
-  typingDelay,
-  typingDelayVariance = 100,
+  typingDelayPerChar,
+  typingDelayPerCharVariance = 100,
 
   onFinish,
 }: TypewriterTextProps) => {
@@ -78,13 +78,16 @@ const Typewriter = ({
   const [typingFinished, setTypingFinished] = useState(false);
   const cursorOpacity = useState(new Animated.Value(1))[0];
 
-  const speedValue = typingDelay ? typingDelay : SPEED_VALUES[speed];
+  const speedValue = typingDelayPerChar
+    ? typingDelayPerChar
+    : SPEED_VALUES[speed];
 
   const effectiveCharDelay =
     Math.floor(
-      Math.random() * (speedValue - (speedValue - typingDelayVariance) + 1)
+      Math.random() *
+        (speedValue - (speedValue - typingDelayPerCharVariance) + 1)
     ) +
-    (speedValue - typingDelayVariance);
+    (speedValue - typingDelayPerCharVariance);
 
   //handle cursors anim start
   useEffect(() => {
