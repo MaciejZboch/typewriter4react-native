@@ -44,6 +44,7 @@ interface TypewriterTextProps {
   onFinish?: () => void;
   reserveSpace?: boolean;
   backwards?: boolean;
+  typingDelay?: number;
   typingDelayVariance?: number;
 }
 
@@ -58,8 +59,9 @@ const Typewriter = ({
   startDelay,
   cursorDisappearDelay = 2000, // default: cursor disappears after 2 seconds
   cursorBlinkTime = 200,
-  reserveSpace = true, // title it "mode" maybe?
+  reserveSpace = true,
   backwards = false,
+  typingDelay,
   typingDelayVariance = 100,
 
   onFinish,
@@ -76,12 +78,13 @@ const Typewriter = ({
   const [typingFinished, setTypingFinished] = useState(false);
   const cursorOpacity = useState(new Animated.Value(1))[0];
 
-  const typingSpeed =
+  const speedValue = typingDelay ? typingDelay : SPEED_VALUES[speed];
+
+  const effectiveCharDelay =
     Math.floor(
-      Math.random() *
-        (SPEED_VALUES[speed] - (SPEED_VALUES[speed] - typingDelayVariance) + 1)
+      Math.random() * (speedValue - (speedValue - typingDelayVariance) + 1)
     ) +
-    (SPEED_VALUES[speed] - typingDelayVariance);
+    (speedValue - typingDelayVariance);
 
   //handle cursors anim start
   useEffect(() => {
@@ -108,7 +111,7 @@ const Typewriter = ({
     }
   }, [typingFinished]);
 
-  //hamdle cursor anim stop
+  //handle cursor anim stop
   useEffect(() => {
     if (!(typingFinished && hideCursorOnFinish)) {
       return;
@@ -156,7 +159,7 @@ const Typewriter = ({
           setDisplayedText(text.slice(0, charIndex - 1));
           setCharIndex(charIndex - 1);
         }
-      }, typingSpeed);
+      }, effectiveCharDelay);
 
       return () => clearTimeout(typingTimeout);
     } else if (
