@@ -30,13 +30,11 @@ const DEFAULT_STYLES = StyleSheet.create({
 
 interface TypewriterTextProps {
   text: string;
-  className?: string;
   textStyle?: StyleProp<TextStyle>;
   cursorStyle?: CursorStyle;
   containerStyle?: StyleProp<ViewStyle>;
   speed?: keyof typeof SPEED_VALUES;
   hideCursorOnFinish?: boolean;
-  showOverflow?: boolean;
   isActive?: boolean;
   startDelay?: number;
   cursorDisappearDelay?: number; // New: Controls how long cursor stays after text finishes
