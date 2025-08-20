@@ -38,7 +38,7 @@ interface TypewriterTextProps {
   hideCursorOnFinish?: boolean;
   showOverflow?: boolean;
   isActive?: boolean;
-  delayMs?: number;
+  startDelay?: number;
   cursorDisappearDelay?: number; // New: Controls how long cursor stays after text finishes
   cursorBlinkTime?: number;
   onFinish?: () => void;
@@ -55,7 +55,7 @@ const Typewriter = ({
   speed = 'fast',
   hideCursorOnFinish = true,
   isActive = true,
-  delayMs,
+  startDelay,
   cursorDisappearDelay = 2000, // default: cursor disappears after 2 seconds
   cursorBlinkTime = 200,
   reserveSpace = true, // title it "mode" maybe?
@@ -131,16 +131,16 @@ const Typewriter = ({
 
   //handle delay
   useEffect(() => {
-    if (!delayMs) {
+    if (!startDelay) {
       return;
     }
 
     setIsWaiting(true);
     const delayTimeout = setTimeout(() => {
       setIsWaiting(false);
-    }, delayMs);
+    }, startDelay);
     return () => clearTimeout(delayTimeout);
-  }, [delayMs]);
+  }, [startDelay]);
 
   //handle typing anim
   useEffect(() => {

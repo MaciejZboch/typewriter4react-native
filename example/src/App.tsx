@@ -8,7 +8,7 @@ export default function App() {
         text="lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet dolor dolor dolor sit ame tttt frak frak frake nn"
         // textStyle={{ fontSize: 28 }}
         cursorBlinkTime={300}
-        delayMs={4}
+        startDelay={4}
         typingDelayVariance={800}
       />
       <View
