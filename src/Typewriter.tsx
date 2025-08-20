@@ -44,6 +44,7 @@ interface TypewriterTextProps {
   onFinish?: () => void;
   reserveSpace?: boolean;
   backwards?: boolean;
+  typingDelayVariance?: number;
 }
 
 const Typewriter = ({
@@ -59,6 +60,8 @@ const Typewriter = ({
   cursorBlinkTime = 200,
   reserveSpace = true, // title it "mode" maybe?
   backwards = false,
+  typingDelayVariance = 100,
+
   onFinish,
 }: TypewriterTextProps) => {
   const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
@@ -75,9 +78,10 @@ const Typewriter = ({
 
   const typingSpeed =
     Math.floor(
-      Math.random() * (SPEED_VALUES[speed] - (SPEED_VALUES[speed] - 100) + 1)
+      Math.random() *
+        (SPEED_VALUES[speed] - (SPEED_VALUES[speed] - typingDelayVariance) + 1)
     ) +
-    (SPEED_VALUES[speed] - 100);
+    (SPEED_VALUES[speed] - typingDelayVariance);
 
   //handle cursors anim start
   useEffect(() => {

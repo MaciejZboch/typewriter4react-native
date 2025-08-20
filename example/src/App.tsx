@@ -9,6 +9,7 @@ export default function App() {
         // textStyle={{ fontSize: 28 }}
         cursorBlinkTime={300}
         delayMs={4}
+        typingDelayVariance={800}
       />
       <View
         style={{
