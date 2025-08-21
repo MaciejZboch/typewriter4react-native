@@ -1,12 +1,12 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 type CursorStyle = Omit<ViewStyle, 'backgroundColor' | 'opacity'> & {
-  /** Replacement for backgroundColor */
+  /** Replacement for backgroundColor. */
   color?: ViewStyle['backgroundColor'];
 };
 
 interface TypewriterTextProps {
-  /**The text string that is to be displayed.*/
+  /**The text string that is to be animated.*/
   text: string;
 
   /**Text style.
@@ -32,7 +32,7 @@ interface TypewriterTextProps {
    *
    * -- This property is ignored if typingDelayPerChar is used. --
    *
-   * Sets one of the pre-determined values for typingDelayPerChar.
+   * Sets one of the pre-determined values for 'typingDelayPerChar'.
    *
    * Available options:
    *   - 'slow'
@@ -59,7 +59,7 @@ interface TypewriterTextProps {
   isActive?: boolean;
 
   /**
-   * Number of milliseconds to wait before the animation starts its run, after it is activated via isActive prop.
+   * Number of milliseconds to wait before the animation starts its run, after it is activated via 'isActive' prop.
    */
   startDelay?: number;
 
@@ -91,7 +91,7 @@ interface TypewriterTextProps {
   backwards?: boolean;
 
   /**
-   * -- Setting this property makes the component ignore the value of the property speed. --
+   * -- Setting this property makes the component ignore the value of the 'speed' property. --
    *
    * - Determines how many milliseconds it takes to type a single character during the animation.
    * - By default its value is set via the speed property.
@@ -99,7 +99,7 @@ interface TypewriterTextProps {
   typingDelayPerChar?: number;
 
   /**
-   * To make the typwriting effect look natural a random additional delay (variance) is added per every character delay.
+   * To make the typewriting effect look natural a random additional delay (variance) is added per every character delay.
    *
    * This parameter determines its maximal value in milliseconds.
    *
