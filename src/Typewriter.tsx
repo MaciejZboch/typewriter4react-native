@@ -12,22 +12,6 @@ import {
 
 type CursorStyle = { color: ColorValue };
 
-const SPEED_VALUES = {
-  slow: 150,
-  medium: 125,
-  fast: 100,
-  very_fast: 75,
-  fastest: 55,
-};
-const DEFAULT_FONTSIZE_VALUE = 20;
-const DEFAULT_STYLES = StyleSheet.create({
-  text: {
-    fontSize: DEFAULT_FONTSIZE_VALUE,
-    lineHeight: DEFAULT_FONTSIZE_VALUE * 1.2,
-    color: 'black',
-  },
-});
-
 interface TypewriterTextProps {
   text: string;
   textStyle?: StyleProp<TextStyle>;
@@ -46,21 +30,66 @@ interface TypewriterTextProps {
   typingDelayPerCharVariance?: number;
 }
 
+type DefaultTypewriterProps = Required<
+  Pick<
+    TypewriterTextProps,
+    | 'text'
+    | 'textStyle'
+    | 'speed'
+    | 'hideCursorOnFinish'
+    | 'isActive'
+    | 'cursorDisappearDelay'
+    | 'cursorBlinkTime'
+    | 'reserveSpace'
+    | 'backwards'
+    | 'typingDelayPerCharVariance'
+  >
+>;
+
+const SPEED_VALUES = {
+  slow: 150,
+  medium: 125,
+  fast: 100,
+  very_fast: 75,
+  fastest: 55,
+};
+const DEFAULT_FONTSIZE_VALUE = 20;
+const DEFAULT_STYLES = StyleSheet.create({
+  text: {
+    fontSize: DEFAULT_FONTSIZE_VALUE,
+    lineHeight: DEFAULT_FONTSIZE_VALUE * 1.2,
+    color: 'black',
+  },
+});
+
+const TYPEWRITER_DEFAULT_VALUES: DefaultTypewriterProps = {
+  text: '',
+  textStyle: DEFAULT_STYLES.text,
+  speed: 'fast',
+  hideCursorOnFinish: true,
+  isActive: true,
+  cursorDisappearDelay: 2000, // default: cursor disappears after 2 seconds
+  cursorBlinkTime: 200,
+  reserveSpace: true,
+  backwards: false,
+  typingDelayPerCharVariance: 100,
+};
+
 const Typewriter = ({
-  text = '',
+  text = TYPEWRITER_DEFAULT_VALUES.text,
   textStyle,
   cursorStyle,
   containerStyle,
-  speed = 'fast',
-  hideCursorOnFinish = true,
-  isActive = true,
+  speed = TYPEWRITER_DEFAULT_VALUES.speed,
+  hideCursorOnFinish = TYPEWRITER_DEFAULT_VALUES.hideCursorOnFinish,
+  isActive = TYPEWRITER_DEFAULT_VALUES.isActive,
   startDelay,
-  cursorDisappearDelay = 2000, // default: cursor disappears after 2 seconds
-  cursorBlinkTime = 200,
-  reserveSpace = true,
-  backwards = false,
+  cursorDisappearDelay = TYPEWRITER_DEFAULT_VALUES.cursorDisappearDelay,
+  cursorBlinkTime = TYPEWRITER_DEFAULT_VALUES.cursorBlinkTime,
+  reserveSpace = TYPEWRITER_DEFAULT_VALUES.reserveSpace,
+  backwards = TYPEWRITER_DEFAULT_VALUES.backwards,
   typingDelayPerChar,
-  typingDelayPerCharVariance = 100,
+  typingDelayPerCharVariance = TYPEWRITER_DEFAULT_VALUES.typingDelayPerCharVariance,
 
   onFinish,
 }: TypewriterTextProps) => {
