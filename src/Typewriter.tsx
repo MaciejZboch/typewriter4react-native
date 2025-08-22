@@ -26,7 +26,7 @@ const Typewriter = ({
   onFinish,
 }: TypewriterTextProps) => {
   const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
-  const { fontSize, lineHeight } = flatTextStyle;
+  const { fontSize } = flatTextStyle;
   const textColor = flatTextStyle.color;
 
   const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
@@ -142,9 +142,13 @@ const Typewriter = ({
       <View
         style={[
           {
+            // width: '100%',
+            // height: '100%',
+            flexDirection: 'row',
             position: 'relative',
             justifyContent: 'center',
             alignItems: 'center',
+            overflow: 'hidden',
           },
           containerStyle,
         ]}
@@ -152,7 +156,13 @@ const Typewriter = ({
         {/* Opaque, absolute-positioned text component that isn't 
         visible but takes-up space even before the animation runs */}
         {reserveSpace && (
-          <View style={{ opacity: 0 }}>
+          <View
+            style={{
+              opacity: 0,
+              width: '100%',
+              height: reserveSpace ? '101%' : 'auto',
+            }}
+          >
             <Text style={[DEFAULT_STYLES.text, textStyle]}>{text}</Text>
           </View>
         )}
@@ -162,7 +172,8 @@ const Typewriter = ({
             opacity: 1,
             position: reserveSpace ? 'absolute' : 'relative',
             width: '100%',
-            height: reserveSpace ? '105%' : 'auto',
+            height: reserveSpace ? '101%' : 'auto',
+            flexShrink: 1,
           }}
         >
           <Text style={[DEFAULT_STYLES.text, textStyle]}>
@@ -175,8 +186,6 @@ const Typewriter = ({
                     width: fontSize! / 4,
                     height: fontSize,
                     transform: [{ translateX: fontSize! / 3 }],
-                    marginBottom:
-                      lineHeight! * 2.25 * lineHeight! - lineHeight!,
                     opacity: cursorOpacity,
                     backgroundColor: cursorStyle?.color
                       ? cursorStyle.color
