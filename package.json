@@ -29,7 +29,9 @@
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
-    "!**/.*"
+    "!**/.*",
+    "!misc",
+    "!node_modules"
   ],
   "scripts": {
     "example": "yarn workspace typewriter4react-native-example",
