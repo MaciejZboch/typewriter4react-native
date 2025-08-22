@@ -183,18 +183,20 @@ const Typewriter = ({
               <Animated.View
                 style={[
                   {
-                    width: 4,
-                    height: fontSize,
-                    transform: [{ translateX: fontSize! / 3 }],
+                    height: fontSize! * 0.6, // height size lowered for the cursor to not interfere with line height despite position relative
+                    width: fontSize! * 0.1,
+                    transform: [
+                      { translateX: fontSize! / 3 }, // place it ahead of the text
+                      { scale: 1.75 }, // make it look larger to make-up for the diminished height
+                    ],
                     opacity: cursorOpacity,
                     backgroundColor: cursorStyle?.color
                       ? cursorStyle.color
                       : 'black',
                   },
-                  textStyle,
                   cursorStyle,
                 ]}
-              ></Animated.View>
+              />
             ) : null}
           </Text>
         </View>
