@@ -7,7 +7,6 @@ export default function App() {
     //   <Typewriter
     //     text="lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet dolor dolor dolor sit ame tttt frak frak frake nn"
     //     textStyle={{ fontSize: 28 }}
-    //     cursorBlinkTime={300}
     //     startDelay={4}
     //     typingDelayPerChar={200}
     //   />

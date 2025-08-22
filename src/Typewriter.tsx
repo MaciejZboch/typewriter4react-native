@@ -183,17 +183,18 @@ const Typewriter = ({
               <Animated.View
                 style={[
                   {
-                    width: fontSize! / 4,
+                    width: 4,
                     height: fontSize,
                     transform: [{ translateX: fontSize! / 3 }],
                     opacity: cursorOpacity,
                     backgroundColor: cursorStyle?.color
                       ? cursorStyle.color
-                      : textColor,
+                      : 'black',
                   },
+                  textStyle,
                   cursorStyle,
                 ]}
-              />
+              ></Animated.View>
             ) : null}
           </Text>
         </View>
