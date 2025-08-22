@@ -152,7 +152,13 @@ const Typewriter = ({
         {/* Opaque, absolute-positioned text component that isn't 
         visible but takes-up space even before the animation runs */}
         {reserveSpace && (
-          <View style={{ opacity: 0 }}>
+          <View
+            style={{
+              opacity: 0,
+              width: '100%',
+              height: reserveSpace ? '105%' : 'auto',
+            }}
+          >
             <Text style={[DEFAULT_STYLES.text, textStyle]}>{text}</Text>
           </View>
         )}
