@@ -20,11 +20,7 @@ export default defineConfig([
     plugins: { prettier },
     rules: {
       'react/react-in-jsx-scope': 'off',
-      'prettier/prettier': ['error',
-        {
-    "endOfLine": "auto"
-        }
-      ]
+      'prettier/prettier': 'error',
     },
   },
   {
