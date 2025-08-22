@@ -18,7 +18,7 @@ interface TypewriterTextProps {
   /**Cursor style.
    * Takes object of custom type CursorStyle.
    *  - By default, width and height are derived from the font size, and vertical positioning is adjusted relative to the line height.
-   *  - Opacity cannot be edited for it is controlled by the animation algorithm.
+   *  - Opacity cannot be edited because it is controlled by the animation algorithm.
    *    @defaultValue {width: fontSize / 4, height: fontSize, color: fontColor, marginBottom: lineHeight! * 2.25 * lineHeight! - lineHeight!}
    */
   cursorStyle?: CursorStyle;
@@ -45,14 +45,14 @@ interface TypewriterTextProps {
    */
   speed?: keyof typeof SPEED_VALUES;
 
-  /**Determines whether the cursor disappears after the whole text is displayed.
+  /**Determines if the cursor disappears after the whole text is displayed.
    *
    * @defaultValue true
    */
   hideCursorOnFinish?: boolean;
 
   /**
-   * Determines whether the animation should run.
+   * Determines if the animation should run.
    *
    * @defaultValue true;
    */
@@ -63,7 +63,7 @@ interface TypewriterTextProps {
    */
   startDelay?: number;
 
-  /** Controls how many milliseconds cursor stays after the whole text is displayed. */
+  /** Controls how many milliseconds the cursor stays after the whole text is displayed. */
   cursorDisappearDelay?: number;
 
   /**
@@ -74,7 +74,7 @@ interface TypewriterTextProps {
   cursorBlinkTime?: number;
 
   /**
-   * Called once typing animation finishes. Doesn't wait for cursor disappearance.
+   * Called once typing animation finishes. Doesn't wait for the cursor to disappear.
    */
   onFinish?: () => void;
 
@@ -99,7 +99,7 @@ interface TypewriterTextProps {
   typingDelayPerChar?: number;
 
   /**
-   * To make the typewriting effect look natural a random additional delay (variance) is added per every character delay.
+   * To make the typewriting effect look natural, a random additional delay (variance) is added per every character delay.
    *
    * This parameter determines its maximal value in milliseconds.
    *
