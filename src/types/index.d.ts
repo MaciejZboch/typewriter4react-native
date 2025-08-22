@@ -107,6 +107,8 @@ interface TypewriterTextProps {
    * @default 100
    */
   typingDelayPerCharVariance?: number;
+
+  cursorType?: 'view' | 'text_simple';
 }
 
 type DefaultTypewriterProps = Required<
