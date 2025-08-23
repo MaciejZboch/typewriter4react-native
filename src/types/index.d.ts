@@ -17,14 +17,18 @@ interface TypewriterTextProps {
 
   /**Text style.
    * Takes object of type StyleProp<TextStyle>.
-   * @defaultValue {fontSize: 20, lineHeight: 24, color: 'black'}
+   * @defaultValue {
+    fontSize: DEFAULT_FONTSIZE_VALUE,
+    color: 'black',
+    flexWrap: 'wrap'
+  }
    */
   textStyle?: StyleProp<TextStyle>;
 
   /**Cursor style.
    * Takes object of custom type CursorStyle.
-   *  - By default, width and height are derived from the font size, and vertical positioning is adjusted relative to the line height.
-   *  - Opacity can be regulated via the parameters: mixOpacity & maxOpacity.
+   *  - By default its size and position are derived from the font size.
+   *  - Opacity can be regulated via the parameters: minOpacity & maxOpacity.
    *
    *
    *    @defaultValue   {
@@ -139,7 +143,8 @@ interface TypewriterTextProps {
   /**
    * 
    * - 'view' is the default cursor - laregly customizable, based on the React Native stock View component.
-   * - 'text_simple' is an alternative cursor - non-customizable but due to its simpler mechanics it may prove to be more robust. The only parameter of this cursor that can be change by passing a cursorStyle object is opacity.
+   * - 'text_simple' is an alternative cursor - it offers limited customization (minOpacity, maxOpacity, fontSize, fontWeight) but due to its simpler mechanics it may prove to be more robust.
+   * - If 'text_simple' is used, a custom string can be used as a cursor via passing it as 'cursorTextSimpleCustomChar' prop.
    *
 
    * @default 'view'
@@ -152,6 +157,12 @@ interface TypewriterTextProps {
    * @default '|'
    */
   cursorTextSimpleCustomChar?: string;
+
+  /**
+   * - If true, the cursor isn't rendered.
+   *
+   * @default false */
+  disableCursor?: boolean?;
 }
 
 type DefaultTypewriterProps = Required<
@@ -167,5 +178,7 @@ type DefaultTypewriterProps = Required<
     | 'reserveSpace'
     | 'backwards'
     | 'typingDelayPerCharVariance'
+    | 'cursorType'
+    | 'disableCursor'
   >
 >;
