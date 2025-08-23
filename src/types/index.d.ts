@@ -173,6 +173,7 @@ type DefaultTypewriterProps = Required<
     | 'reserveSpace'
     | 'backwards'
     | 'typingDelayPerCharVariance'
+    | 'cursorType'
     | 'disableCursor'
   >
 >;

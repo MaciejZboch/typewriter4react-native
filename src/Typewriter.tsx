@@ -22,7 +22,7 @@ const Typewriter = ({
   backwards = TYPEWRITER_DEFAULT_VALUES.backwards,
   typingDelayPerChar,
   typingDelayPerCharVariance = TYPEWRITER_DEFAULT_VALUES.typingDelayPerCharVariance,
-  cursorType = 'view',
+  cursorType = TYPEWRITER_DEFAULT_VALUES.cursorType,
   cursorTextSimpleCustomChar,
   disableCursor = TYPEWRITER_DEFAULT_VALUES.disableCursor,
   onFinish,
