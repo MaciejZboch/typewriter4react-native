@@ -162,7 +162,7 @@ interface TypewriterTextProps {
    * - If true, the cursor isn't rendered.
    *
    * @default false */
-  disableCursor?: boolean?;
+  disableCursor?: boolean;
 }
 
 type DefaultTypewriterProps = Required<
