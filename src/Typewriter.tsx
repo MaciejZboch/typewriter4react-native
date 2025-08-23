@@ -51,15 +51,18 @@ const Typewriter = ({
   //handle cursors anim start
   useEffect(() => {
     const startCursorAnimation = () => {
+      const minOpacity = Number(cursorStyle?.minOpacity ?? 0);
+      const maxOpacity = Number(cursorStyle?.maxOpacity ?? 1);
+
       cursorBlinkAnimation.current = Animated.loop(
         Animated.sequence([
           Animated.timing(cursorOpacity, {
-            toValue: 0,
+            toValue: minOpacity,
             duration: cursorBlinkTime,
             useNativeDriver: true,
           }),
           Animated.timing(cursorOpacity, {
-            toValue: 1,
+            toValue: maxOpacity,
             duration: cursorBlinkTime,
             useNativeDriver: true,
           }),
@@ -206,9 +209,11 @@ const Typewriter = ({
                   style={[
                     {
                       fontSize: fontSize!,
+                      fontWeight: 600,
                       opacity: cursorOpacity,
                       color: cursorStyle?.color ? cursorStyle.color : 'black',
                     },
+                    cursorStyle,
                   ]}
                 >
                   {'|'}

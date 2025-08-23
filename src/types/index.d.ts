@@ -1,8 +1,14 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 type CursorStyle = Omit<ViewStyle, 'backgroundColor' | 'opacity'> & {
-  /** Replacement for backgroundColor. */
   color?: ViewStyle['backgroundColor'];
+  minOpacity?: ViewStyle['opacity'];
+  maxOpacity?: ViewStyle['opacity'];
+
+  /** For text_simple cursor only. */
+  fontSize?: TextStyle['fontSize'];
+  /** For text_simple cursor only. */
+  fontWeight?: TextStyle['fontWeight'];
 };
 
 interface TypewriterTextProps {
@@ -18,8 +24,20 @@ interface TypewriterTextProps {
   /**Cursor style.
    * Takes object of custom type CursorStyle.
    *  - By default, width and height are derived from the font size, and vertical positioning is adjusted relative to the line height.
-   *  - Opacity cannot be edited because it is controlled by the animation algorithm.
-   *    @defaultValue {width: fontSize / 4, height: fontSize, color: fontColor, marginBottom: lineHeight! * 2.25 * lineHeight! - lineHeight!}
+   *  - Opacity can be regulated via the parameters: mixOpacity & maxOpacity.
+   *
+   *
+   *    @defaultValue   {
+   * - height: fontSize! * 0.6, // height size lowered for the cursor to not interfere with line height despite position relative
+   * - width: fontSize! * 0.1,
+   * - minOpacity: 0,
+   * - maxOpacity: 1,
+   * - transform: [
+   *                    - - { translateX: fontSize! / 3 }, // place it ahead of the text
+   *                    - - { scale: 1.75 }, // make it look larger to make-up for the diminished height
+   *
+   * ]
+   * }
    */
   cursorStyle?: CursorStyle;
 
@@ -108,6 +126,14 @@ interface TypewriterTextProps {
    */
   typingDelayPerCharVariance?: number;
 
+  /**
+   * 
+   * - 'view' is the default cursor - laregly customizable, based on the React Native stock View component.
+   * - 'text_simple' is an alternative cursor - non-customizable but due to its simpler mechanics it may prove to be more robust. The only parameter of this cursor that can be change by passing a cursorStyle object is opacity.
+   *
+
+   * @default 'view'
+   */
   cursorType?: 'view' | 'text_simple';
 }
 
