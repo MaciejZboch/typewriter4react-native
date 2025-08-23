@@ -29,4 +29,5 @@ export const TYPEWRITER_DEFAULT_VALUES: DefaultTypewriterProps = {
   reserveSpace: true,
   backwards: false,
   typingDelayPerCharVariance: 100,
+  disableCursor: false,
 };

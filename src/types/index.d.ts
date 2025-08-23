@@ -152,6 +152,12 @@ interface TypewriterTextProps {
    * @default '|'
    */
   cursorTextSimpleCustomChar?: string;
+
+  /**
+   * - If true, the cursor isn't rendered.
+   *
+   * @default false */
+  disableCursor?: boolean?;
 }
 
 type DefaultTypewriterProps = Required<
@@ -167,5 +173,6 @@ type DefaultTypewriterProps = Required<
     | 'reserveSpace'
     | 'backwards'
     | 'typingDelayPerCharVariance'
+    | 'disableCursor'
   >
 >;
