@@ -23,7 +23,7 @@ const Typewriter = ({
   typingDelayPerChar,
   typingDelayPerCharVariance = TYPEWRITER_DEFAULT_VALUES.typingDelayPerCharVariance,
   cursorType = 'view',
-
+  cursorTextSimpleCustomChar,
   onFinish,
 }: TypewriterTextProps) => {
   const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
@@ -148,8 +148,6 @@ const Typewriter = ({
       <View
         style={[
           {
-            // width: '100%',
-            // height: '100%',
             flexDirection: 'row',
             position: 'relative',
             justifyContent: 'center',
@@ -216,7 +214,7 @@ const Typewriter = ({
                     cursorStyle,
                   ]}
                 >
-                  {'|'}
+                  {cursorTextSimpleCustomChar ?? '|'}
                 </Animated.Text>
               )
             ) : null}

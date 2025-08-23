@@ -135,6 +135,23 @@ interface TypewriterTextProps {
    * @default 'view'
    */
   cursorType?: 'view' | 'text_simple';
+
+  /**
+   * 
+   * - 'view' is the default cursor - laregly customizable, based on the React Native stock View component.
+   * - 'text_simple' is an alternative cursor - non-customizable but due to its simpler mechanics it may prove to be more robust. The only parameter of this cursor that can be change by passing a cursorStyle object is opacity.
+   *
+
+   * @default 'view'
+   */
+
+  /**
+   * - Replaces the string '|' with any string that is passed.
+   * - It's stronly recommended to use only single character strings, to prevent visual bugs.
+   *
+   * @default '|'
+   */
+  cursorTextSimpleCustomChar?: string;
 }
 
 type DefaultTypewriterProps = Required<
