@@ -13,8 +13,8 @@ const DEFAULT_FONTSIZE_VALUE = 20;
 export const DEFAULT_STYLES = StyleSheet.create({
   text: {
     fontSize: DEFAULT_FONTSIZE_VALUE,
-    lineHeight: DEFAULT_FONTSIZE_VALUE * 1.2,
     color: 'black',
+    flexWrap: 'wrap',
   },
 });
 

@@ -22,12 +22,12 @@ const Typewriter = ({
   backwards = TYPEWRITER_DEFAULT_VALUES.backwards,
   typingDelayPerChar,
   typingDelayPerCharVariance = TYPEWRITER_DEFAULT_VALUES.typingDelayPerCharVariance,
-
+  cursorType = 'view',
+  cursorTextSimpleCustomChar,
   onFinish,
 }: TypewriterTextProps) => {
   const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
-  const { fontSize, lineHeight } = flatTextStyle;
-  const textColor = flatTextStyle.color;
+  const { fontSize } = flatTextStyle;
 
   const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
 
@@ -51,15 +51,18 @@ const Typewriter = ({
   //handle cursors anim start
   useEffect(() => {
     const startCursorAnimation = () => {
+      const minOpacity = Number(cursorStyle?.minOpacity ?? 0);
+      const maxOpacity = Number(cursorStyle?.maxOpacity ?? 1);
+
       cursorBlinkAnimation.current = Animated.loop(
         Animated.sequence([
           Animated.timing(cursorOpacity, {
-            toValue: 0,
+            toValue: minOpacity,
             duration: cursorBlinkTime,
             useNativeDriver: true,
           }),
           Animated.timing(cursorOpacity, {
-            toValue: 1,
+            toValue: maxOpacity,
             duration: cursorBlinkTime,
             useNativeDriver: true,
           }),
@@ -90,7 +93,10 @@ const Typewriter = ({
       }).start();
     };
 
-    const timeout = setTimeout(fadeOut, cursorDisappearDelay);
+    const effectiveCursorDisappearDelay =
+      cursorType === 'view' ? cursorDisappearDelay : 0;
+
+    const timeout = setTimeout(fadeOut, effectiveCursorDisappearDelay);
     return () => clearTimeout(timeout); // Clean up if unmounts
   }, [typingFinished]);
 
@@ -142,9 +148,11 @@ const Typewriter = ({
       <View
         style={[
           {
+            flexDirection: 'row',
             position: 'relative',
             justifyContent: 'center',
             alignItems: 'center',
+            overflow: 'hidden',
           },
           containerStyle,
         ]}
@@ -156,7 +164,7 @@ const Typewriter = ({
             style={{
               opacity: 0,
               width: '100%',
-              height: reserveSpace ? '105%' : 'auto',
+              height: reserveSpace ? '101%' : 'auto',
             }}
           >
             <Text style={[DEFAULT_STYLES.text, textStyle]}>{text}</Text>
@@ -168,29 +176,47 @@ const Typewriter = ({
             opacity: 1,
             position: reserveSpace ? 'absolute' : 'relative',
             width: '100%',
-            height: reserveSpace ? '105%' : 'auto',
+            height: reserveSpace ? '101%' : 'auto',
+            flexShrink: 1,
           }}
         >
           <Text style={[DEFAULT_STYLES.text, textStyle]}>
             {displayedText}
             {/* cursor element */}
             {!typingFinished || hideCursorOnFinish ? (
-              <Animated.View
-                style={[
-                  {
-                    width: fontSize! / 4,
-                    height: fontSize,
-                    transform: [{ translateX: fontSize! / 3 }],
-                    marginBottom:
-                      lineHeight! * 2.25 * lineHeight! - lineHeight!,
-                    opacity: cursorOpacity,
-                    backgroundColor: cursorStyle?.color
-                      ? cursorStyle.color
-                      : textColor,
-                  },
-                  cursorStyle,
-                ]}
-              />
+              cursorType === 'view' ? (
+                <Animated.View
+                  style={[
+                    {
+                      height: fontSize! * 0.6, // height size lowered for the cursor to not interfere with line height despite position relative
+                      width: fontSize! * 0.1,
+                      transform: [
+                        { translateX: fontSize! / 3 }, // place it ahead of the text
+                        { scale: 1.75 }, // make it look larger to make-up for the diminished height
+                      ],
+                      opacity: cursorOpacity,
+                      backgroundColor: cursorStyle?.color
+                        ? cursorStyle.color
+                        : 'black',
+                    },
+                    cursorStyle,
+                  ]}
+                />
+              ) : (
+                <Animated.Text
+                  style={[
+                    {
+                      fontSize: fontSize!,
+                      fontWeight: 600,
+                      opacity: cursorOpacity,
+                      color: cursorStyle?.color ? cursorStyle.color : 'black',
+                    },
+                    cursorStyle,
+                  ]}
+                >
+                  {cursorTextSimpleCustomChar ?? '|'}
+                </Animated.Text>
+              )
             ) : null}
           </Text>
         </View>
