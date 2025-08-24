@@ -1,4 +1,5 @@
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { SPEED_VALUES } from '../constants';
 
 type CursorStyle = Omit<ViewStyle, 'backgroundColor' | 'opacity'> & {
   color?: ViewStyle['backgroundColor'];
@@ -11,7 +12,7 @@ type CursorStyle = Omit<ViewStyle, 'backgroundColor' | 'opacity'> & {
   fontWeight?: TextStyle['fontWeight'];
 };
 
-interface TypewriterTextProps {
+export interface TypewriterTextProps {
   /**The text string that is to be animated.*/
   text: string;
 
@@ -165,7 +166,7 @@ interface TypewriterTextProps {
   disableCursor?: boolean;
 }
 
-type DefaultTypewriterProps = Required<
+export type DefaultTypewriterProps = Required<
   Pick<
     TypewriterTextProps,
     | 'text'
