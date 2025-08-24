@@ -1,6 +1,6 @@
 ### Update: July 25, 2025
 
-Version: 0.3.2
+Version: 0.3.4
 
 New updates:
 
