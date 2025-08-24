@@ -2,8 +2,7 @@
 X fix: fix animation delay
 X feat: add options (maybe min-max delay to typing speed variance algorith)
 X feat: add backspace func
-0 fix: add showCursor option
-
+X fix: add showCursor option
 O feat: add queue (text to display after first string is backspaced)
 O feat: add tests
 O feat: add text node handling (to allow mixing styles in one component e.g. w/ differently styled spans)
