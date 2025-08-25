@@ -1,10 +1,10 @@
 ### Update: July 25, 2025
-Version: 0.3.4
+Version: 0.3.5
 
 New updates:
 
-- Missing types have been added.
-- Readme has been added.
+- Example app has been updated
+- Readme has been formatted
 
 # typewriter4react-native
 
@@ -84,3 +84,5 @@ Best contact me via GitHub or e-mail if you are willing to contribute. <br/> <br
 
 ## License
 MIT
+
+
