@@ -1,76 +1,112 @@
-import { View, StyleSheet } from 'react-native';
-import { Typewriter } from 'typewriter4react-native';
+import { SectionList, Text, View } from 'react-native';
+import ExampleBox from '../components/ExampleBox';
+import { useState } from 'react';
+import DividerLine from '../components/DividerLine';
+import { ColorValues } from '../constants/colors';
+import type { ExampleType } from '../types';
+import { examples } from '../data/examples';
 
 export default function App() {
-  return (
-    // <View style={styles.container}>
-    //   <Typewriter
-    //     text="lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet dolor dolor dolor sit ame tttt frak frak frake nn"
-    //     textStyle={{ fontSize: 28 }}
-    //     startDelay={4}
-    //     typingDelayPerChar={200}
-    //   />
-    //   <View
-    //     style={{
-    //       width: 150,
-    //       height: 150,
-    //       backgroundColor: 'blue',
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //     }}
-    //   >
-    //     <Text>I am some element</Text>
-    //   </View>
-    //   <View
-    //     style={{
-    //       width: 150,
-    //       height: 150,
-    //       backgroundColor: 'red',
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //     }}
-    //   >
-    //     <Text>I am some other element</Text>
-    //   </View>
-    // </View>
+  const [activatedExampleIds, setActivatedExampleIds] = useState<
+    ExampleType['id'][]
+  >([]);
 
+  return (
     <View
       style={{
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
+        backgroundColor: ColorValues.offWhite,
         alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingTop: 100,
       }}
     >
+      {/* header */}
       <View
         style={{
-          width: '80%',
-          height: '50%',
-          borderColor: 'green',
-          borderWidth: 1,
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <Typewriter
-          isActive
-          textStyle={{
-            fontSize: 30,
-            fontFamily: 'Academy Engraved LET',
+        <Text
+          style={{
+            fontFamily: 'Roboto',
+            fontSize: 24,
+            fontWeight: 700,
+            color: ColorValues.offBlack,
           }}
-          text={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          elementum nunc sit amet urna suscipit tempus. Aenean nisi libero,
-          condimentum eget cursus eget, lobortis eget ligula. Nunc ac ex et
-          ipsum efficitur maximus euismod eget nulla. Curabitur gravida arcu
-          commodo arcu ultricies, quis rutrum odio pulvinar. Integer pharetra
-         In laoreet sagittis leo quis elementum. Ut id
-          massa blandit, auctor tortor ut, tempor dolor. In hac habitasse platea
-          dictumst.`}
-          reserveSpace
+        >
+          typewriter4react-native
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'Roboto',
+            fontSize: 20,
+            fontWeight: 500,
+            color: ColorValues.offBlack,
+            paddingTop: 8,
+          }}
+        >
+          example app
+        </Text>
+      </View>
+      {/* main */}
+      <View
+        style={{
+          width: '100%',
+          paddingHorizontal: 4,
+          marginTop: 12,
+          paddingVertical: 24,
+          gap: 36,
+        }}
+      >
+        <SectionList
+          sections={examples}
+          style={{ paddingHorizontal: 28 }}
+          stickySectionHeadersEnabled={false}
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={{ borderRadius: 24, paddingBottom: 12 }}>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: 700,
+                  textAlign: 'center',
+                  textDecorationLine: 'underline',
+                  marginBottom: 16,
+                  fontFamily: 'Roboto',
+                  color: ColorValues.offBlack,
+                }}
+              >
+                {title}
+              </Text>
+            </View>
+          )}
+          renderItem={({ item }: { item: ExampleType }) => (
+            <ExampleBox
+              key={item.id}
+              title={item.title}
+              description={item.description}
+              isActive={activatedExampleIds.includes(item.id)}
+              typewriterProps={item.typewriterProps}
+              onButtonPress={() =>
+                setActivatedExampleIds((prev) => [...prev, item.id])
+              }
+            />
+          )}
+          ListFooterComponent={
+            <DividerLine
+              viewStyle={{
+                paddingBottom: 124,
+                paddingTop: 100,
+              }}
+              width="50%"
+              weight={0.25}
+            />
+          }
         />
       </View>
-      <View style={{ width: 20, height: 20, backgroundColor: 'red' }} />
-      <View style={{ width: 20, height: 20, backgroundColor: 'blue' }} />
-      <View style={{ width: 20, height: 20, backgroundColor: 'green' }} />
-      <View style={{ width: 20, height: 20, backgroundColor: 'yellow' }} />
     </View>
   );
 }
