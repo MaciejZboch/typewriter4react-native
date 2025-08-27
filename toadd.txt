@@ -3,6 +3,7 @@ X fix: fix animation delay
 X feat: add options (maybe min-max delay to typing speed variance algorith)
 X feat: add backspace func
 X fix: add showCursor option
+0 fix: fix cursor showing to the side before text runs if alignText === 'center'
 O feat: add queue (text to display after first string is backspaced)
 O feat: add tests
 O feat: add text node handling (to allow mixing styles in one component e.g. w/ differently styled spans)
