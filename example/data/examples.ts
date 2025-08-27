@@ -3,7 +3,7 @@ import type { ExampleSection } from '../types';
 
 export const examples: ExampleSection[] = [
   {
-    title: 'Space management',
+    title: 'Space management 🚀',
     data: [
       {
         id: 'sp1',
@@ -34,7 +34,7 @@ export const examples: ExampleSection[] = [
     ],
   },
   {
-    title: 'Typing speed',
+    title: 'Typing speed 💨',
     data: [
       {
         id: 's1',
@@ -79,7 +79,7 @@ export const examples: ExampleSection[] = [
     ],
   },
   {
-    title: 'Text and container customization',
+    title: 'Text and container customization 🎨',
     data: [
       {
         id: 'tc1',
@@ -104,7 +104,7 @@ export const examples: ExampleSection[] = [
     ],
   },
   {
-    title: 'Cursor customization',
+    title: 'Cursor customization 🖱️',
     data: [
       {
         id: 'cc1',
@@ -141,7 +141,7 @@ export const examples: ExampleSection[] = [
     ],
   },
   {
-    title: 'Backwards ‘typing’',
+    title: 'Backwards ‘typing’ 🔙',
     data: [
       {
         id: 'bt1',

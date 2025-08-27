@@ -78,13 +78,14 @@ export default function App() {
           style={{ paddingHorizontal: 28 }}
           stickySectionHeadersEnabled={false}
           renderSectionHeader={({ section: { title } }) => (
-            <View style={{ borderRadius: 24, paddingBottom: 12 }}>
+            <View
+              style={{ borderRadius: 24, paddingBottom: 12, paddingTop: 24 }}
+            >
               <Text
                 style={{
                   fontSize: 24,
                   fontWeight: 700,
                   textAlign: 'center',
-                  textDecorationLine: 'underline',
                   marginBottom: 16,
                   fontFamily: 'Roboto',
                   color: ColorValues.offBlack,
