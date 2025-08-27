@@ -186,7 +186,7 @@ const Typewriter = ({
             {/* cursor element */}
             {!disableCursor && (
               <>
-                {!typingFinished || hideCursorOnFinish ? (
+                {!typingFinished || !hideCursorOnFinish ? (
                   cursorType === 'view' ? (
                     <Animated.View
                       style={[
