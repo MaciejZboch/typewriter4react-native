@@ -8,9 +8,9 @@ Currently the only open-source React Native typewriter that ensures stable conta
 
 Fully compatible with Expo.
 
-## Update: July 25, 2025
+## Update: July 27, 2025
 
-Version: 0.4.0
+Version: 0.4.1
 
 New updates:
 
@@ -77,7 +77,7 @@ const SomeComponent = () => {
 
 ## Contributing
 
-Best contact me via GitHub or e-mail if you are willing to contribute.  
+Best contact me via GitHub or e-mail if you are willing to contribute.  \\
 Some of the planned (or dreamed) additions are listed in the file `toadd.txt` in the root folder of the package repository.
 
 ## License
