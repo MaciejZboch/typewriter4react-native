@@ -86,7 +86,10 @@ export interface TypewriterTextProps {
    */
   startDelay?: number;
 
-  /** Controls how many milliseconds the cursor stays after the whole text is displayed. */
+  /** Controls how many milliseconds the cursor stays after the whole text is displayed.
+   *
+   * @defaultValue 2000
+   */
   cursorDisappearDelay?: number;
 
   /**
