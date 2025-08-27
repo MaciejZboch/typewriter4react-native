@@ -5,11 +5,13 @@ import DividerLine from '../components/DividerLine';
 import { ColorValues } from '../constants/colors';
 import type { ExampleType } from '../types';
 import { examples } from '../data/examples';
+import { Typewriter } from 'typewriter4react-native';
 
 export default function App() {
   const [activatedExampleIds, setActivatedExampleIds] = useState<
     ExampleType['id'][]
   >([]);
+  const [subheaderIsActive, setSubheaderIsActive] = useState<boolean>(false);
 
   return (
     <View
@@ -30,27 +32,36 @@ export default function App() {
           alignItems: 'center',
         }}
       >
-        <Text
-          style={{
+        <Typewriter
+          isActive
+          textStyle={{
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: 700,
             color: ColorValues.offBlack,
+            textAlign: 'center',
           }}
-        >
-          typewriter4react-native
-        </Text>
-        <Text
-          style={{
+          text="typewriter4react-native"
+          cursorDisappearDelay={500}
+          onFinish={() => {
+            setSubheaderIsActive(true);
+          }}
+        />
+
+        <Typewriter
+          isActive={subheaderIsActive}
+          disableCursor
+          speed="slow"
+          textStyle={{
             fontFamily: 'Roboto',
             fontSize: 20,
             fontWeight: 500,
             color: ColorValues.offBlack,
             paddingTop: 8,
+            textAlign: 'center',
           }}
-        >
-          example app
-        </Text>
+          text="example app"
+        />
       </View>
       {/* main */}
       <View
