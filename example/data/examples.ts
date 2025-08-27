@@ -1,3 +1,4 @@
+import { defaultTextStyle } from '../constants/styles';
 import type { ExampleSection } from '../types';
 
 export const examples: ExampleSection[] = [
@@ -12,8 +13,7 @@ export const examples: ExampleSection[] = [
         typewriterProps: {
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nunc sit amet urna suscipit tempus.',
           textStyle: {
-            fontSize: 24,
-            fontFamily: 'Roboto',
+            ...defaultTextStyle,
           },
           reserveSpace: true,
         },
@@ -25,8 +25,7 @@ export const examples: ExampleSection[] = [
           "With the reserveSpace = false, the typed text does not push the space in which it is placed while it's being typed.",
         typewriterProps: {
           textStyle: {
-            fontSize: 24,
-            fontFamily: 'Roboto',
+            ...defaultTextStyle,
           },
           text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nunc sit amet urna suscipit tempus.`,
           reserveSpace: false,
@@ -45,8 +44,7 @@ export const examples: ExampleSection[] = [
         typewriterProps: {
           speed: 'very_fast',
           textStyle: {
-            fontSize: 24,
-            fontFamily: 'Roboto',
+            ...defaultTextStyle,
           },
           text: "Speeding motorcycle! Wont't you change me? 🏍️",
         },
@@ -59,8 +57,7 @@ export const examples: ExampleSection[] = [
         typewriterProps: {
           typingDelayPerChar: 25,
           textStyle: {
-            fontSize: 24,
-            fontFamily: 'Roboto',
+            ...defaultTextStyle,
           },
           text: "Speeding motorcycle! Wont't you change me? 🏍️",
         },
@@ -74,8 +71,7 @@ export const examples: ExampleSection[] = [
           speed: 'slow',
           typingDelayPerCharVariance: 400,
           textStyle: {
-            fontSize: 24,
-            fontFamily: 'Roboto',
+            ...defaultTextStyle,
           },
           text: "Speeding motorcycle! Wont't you change me? 🏍️",
         },
@@ -93,8 +89,7 @@ export const examples: ExampleSection[] = [
           'Both text and container can be customized freely using React Native’s stylesheets.',
         typewriterProps: {
           textStyle: {
-            fontSize: 24,
-            fontFamily: 'Roboto',
+            ...defaultTextStyle,
             textAlign: 'right',
           },
           containerStyle: {
