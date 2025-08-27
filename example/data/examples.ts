@@ -1,3 +1,4 @@
+import { exampleStrings } from '../constants/exampleStrings';
 import { defaultTextStyle } from '../constants/styles';
 import type { ExampleSection } from '../types';
 
@@ -11,7 +12,7 @@ export const examples: ExampleSection[] = [
         description:
           "With the reserveSpace = true (which is the default setting), the typed text doesn't push the space in which it is placed.",
         typewriterProps: {
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nunc sit amet urna suscipit tempus.',
+          text: exampleStrings.spaceOddity,
           textStyle: {
             ...defaultTextStyle,
           },
@@ -27,7 +28,7 @@ export const examples: ExampleSection[] = [
           textStyle: {
             ...defaultTextStyle,
           },
-          text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nunc sit amet urna suscipit tempus.`,
+          text: exampleStrings.spaceOddity,
           reserveSpace: false,
         },
       },
@@ -46,7 +47,7 @@ export const examples: ExampleSection[] = [
           textStyle: {
             ...defaultTextStyle,
           },
-          text: "Speeding motorcycle! Wont't you change me? 🏍️",
+          text: exampleStrings.speedingMotorcycle,
         },
       },
       {
@@ -59,7 +60,7 @@ export const examples: ExampleSection[] = [
           textStyle: {
             ...defaultTextStyle,
           },
-          text: "Speeding motorcycle! Wont't you change me? 🏍️",
+          text: exampleStrings.speedingMotorcycle,
         },
       },
       {
@@ -73,7 +74,7 @@ export const examples: ExampleSection[] = [
           textStyle: {
             ...defaultTextStyle,
           },
-          text: "Speeding motorcycle! Wont't you change me? 🏍️",
+          text: exampleStrings.speedingMotorcycle,
         },
       },
     ],
@@ -89,7 +90,7 @@ export const examples: ExampleSection[] = [
           'Both text and container can be customized freely using React Native’s stylesheets.',
         typewriterProps: {
           textStyle: {
-            ...defaultTextStyle,
+            fontFamily: 'Helvetica',
             textAlign: 'right',
           },
           containerStyle: {
@@ -97,7 +98,7 @@ export const examples: ExampleSection[] = [
             backgroundColor: '#81a9ab',
             borderRadius: 40,
           },
-          text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nunc sit amet urna suscipit tempus.`,
+          text: exampleStrings.unwritten,
           reserveSpace: true,
         },
       },
@@ -113,7 +114,7 @@ export const examples: ExampleSection[] = [
         description:
           'The cursor of type ‘view‘ (default) can be customized using multiple options. Its appearance can be modified using View type stylesheets inside cursorStyle prop.',
         typewriterProps: {
-          text: 'Waltz, bad nymph, for quick jigs vex. How vexingly quick daft zebras jump!',
+          text: exampleStrings.pangrams_1,
           cursorType: 'view',
           cursorBlinkTime: 500,
           cursorStyle: {
@@ -135,7 +136,7 @@ export const examples: ExampleSection[] = [
           cursorStyle: { minOpacity: 1 },
           cursorTextSimpleCustomChar: '🐈‍⬛',
           hideCursorOnFinish: false,
-          text: 'Sphinx of black quartz, judge my vow. Pack my box with five dozen liquor jugs!',
+          text: exampleStrings.pangrams_2,
         },
       },
     ],
@@ -151,7 +152,7 @@ export const examples: ExampleSection[] = [
         typewriterProps: {
           textStyle: { fontSize: 24, fontFamily: 'Roboto' },
           backwards: true,
-          text: 'The big brown fox jumped over a lazy dog. Whoa! That was amazing - I said.',
+          text: exampleStrings.somebodyThatIUsedToKnow,
         },
       },
     ],
