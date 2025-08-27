@@ -10,7 +10,7 @@ Fully compatible with Expo.
 
 ## Update: July 25, 2025
 
-Version: 0.3.6
+Version: 0.4.0
 
 New updates:
 
