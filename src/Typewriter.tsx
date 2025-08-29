@@ -104,15 +104,18 @@ const Typewriter = ({
   //handle delay
   useEffect(() => {
     if (!startDelay) {
+      setIsWaiting(false);
       return;
     }
-
-    setIsWaiting(true);
-    const delayTimeout = setTimeout(() => {
-      setIsWaiting(false);
-    }, startDelay);
-    return () => clearTimeout(delayTimeout);
-  }, [startDelay]);
+    // only activate the timer when the component isActive
+    if (isActive) {
+      setIsWaiting(true);
+      const delayTimeout = setTimeout(() => {
+        setIsWaiting(false);
+      }, startDelay);
+      return () => clearTimeout(delayTimeout);
+    }
+  }, [startDelay, isActive]);
 
   //handle typing anim
   useEffect(() => {
