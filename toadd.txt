@@ -7,3 +7,5 @@ X fix: add showCursor option
 O feat: add queue (text to display after first string is backspaced)
 O feat: add tests
 O feat: add text node handling (to allow mixing styles in one component e.g. w/ differently styled spans)
+0 fix: hide cursor if the text is not active (add a prop show cursor, before text animation start)
+0 fix: delayStart works only if it's assigned to the first typewriter out of the bunch
