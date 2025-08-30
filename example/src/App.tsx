@@ -1,18 +1,23 @@
-import { SectionList, Text, View } from 'react-native';
+import { SectionList, Text, TouchableOpacity, View } from 'react-native';
 import ExampleBox from '../components/ExampleBox';
 import { useState } from 'react';
 import DividerLine from '../components/DividerLine';
 import { ColorValues } from '../constants/colors';
-import type { ExampleType } from '../types';
+import type { ExampleScreen, ExampleScreenTitle, ExampleType } from '../types';
 import { examples } from '../data/examples';
 import { Typewriter } from 'typewriter4react-native';
+import { defaultTextStyle } from '../constants/styles';
+import FullscreenModal from '../components/FullscreenModal';
+import { exampleScreens } from '../data/exampleScreens';
 
 export default function App() {
   const [activatedExampleIds, setActivatedExampleIds] = useState<
     ExampleType['id'][]
   >([]);
   const [subheaderIsActive, setSubheaderIsActive] = useState<boolean>(false);
-
+  const [visibleModal, setVisibleModal] = useState<ExampleScreenTitle | null>(
+    null
+  );
   return (
     <View
       style={{
@@ -108,17 +113,82 @@ export default function App() {
             />
           )}
           ListFooterComponent={
-            <DividerLine
-              viewStyle={{
-                paddingBottom: 124,
-                paddingTop: 100,
-              }}
-              width="50%"
-              weight={0.25}
-            />
+            <>
+              <View style={{ paddingHorizontal: 28 }}>
+                <View
+                  style={{
+                    borderRadius: 24,
+                    paddingBottom: 12,
+                    paddingTop: 24,
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 24,
+                      fontWeight: 700,
+                      textAlign: 'center',
+                      marginBottom: 4,
+                      fontFamily: 'Roboto',
+                      color: ColorValues.offBlack,
+                    }}
+                  >
+                    Example screens 🖼️
+                  </Text>
+                  <Text
+                    style={{
+                      ...defaultTextStyle,
+                      fontSize: 14,
+                      color: ColorValues.lighGray,
+                    }}
+                  >
+                    Click on one of the emojis to proceed
+                  </Text>
+                </View>
+                {/* Example screen links */}
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingTop: 24,
+                  }}
+                >
+                  {exampleScreens.map((screen, indexNum: number) => (
+                    <TouchableOpacity
+                      onPress={() => setVisibleModal(screen.title)}
+                      key={indexNum}
+                    >
+                      <Text style={{ fontSize: 56, width: 56 }}>
+                        {screen.icon}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+              <DividerLine
+                viewStyle={{
+                  paddingBottom: 124,
+                  paddingTop: 48,
+                }}
+                width="50%"
+                weight={0.25}
+              />
+            </>
           }
         />
       </View>
+      {exampleScreens.map((screen: ExampleScreen, indexNum: number) => (
+        <FullscreenModal
+          isActive={visibleModal === screen.title}
+          closeModalFunc={() => setVisibleModal(null)}
+          key={indexNum}
+        >
+          {screen.screen}
+        </FullscreenModal>
+      ))}
     </View>
   );
 }
