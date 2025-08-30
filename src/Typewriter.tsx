@@ -203,7 +203,9 @@ const Typewriter = ({
                           opacity: cursorOpacity,
                           backgroundColor: cursorStyle?.color
                             ? cursorStyle.color
-                            : 'black',
+                            : textStyle
+                              ? flatTextStyle.color
+                              : 'black',
                         },
                         cursorStyle,
                       ]}
