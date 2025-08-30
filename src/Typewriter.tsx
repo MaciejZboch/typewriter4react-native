@@ -36,7 +36,10 @@ const Typewriter = ({
   const [charIndex, setCharIndex] = useState(!backwards ? 0 : text.length);
   const [isWaiting, setIsWaiting] = useState(false);
   const [typingFinished, setTypingFinished] = useState(false);
-  const cursorOpacity = useState(new Animated.Value(1))[0];
+
+  const minCursorOpacity = Number(cursorStyle?.minOpacity ?? 0);
+  const maxCursorOpacity = Number(cursorStyle?.maxOpacity ?? 1);
+  const cursorOpacity = useState(new Animated.Value(minCursorOpacity))[0];
 
   const speedValue: number = typingDelayPerChar
     ? typingDelayPerChar
@@ -52,18 +55,15 @@ const Typewriter = ({
   //handle cursors anim start
   useEffect(() => {
     const startCursorAnimation = () => {
-      const minOpacity = Number(cursorStyle?.minOpacity ?? 0);
-      const maxOpacity = Number(cursorStyle?.maxOpacity ?? 1);
-
       cursorBlinkAnimation.current = Animated.loop(
         Animated.sequence([
           Animated.timing(cursorOpacity, {
-            toValue: minOpacity,
+            toValue: maxCursorOpacity,
             duration: cursorBlinkTime,
             useNativeDriver: true,
           }),
           Animated.timing(cursorOpacity, {
-            toValue: maxOpacity,
+            toValue: minCursorOpacity,
             duration: cursorBlinkTime,
             useNativeDriver: true,
           }),
@@ -72,10 +72,10 @@ const Typewriter = ({
       cursorBlinkAnimation.current.start();
     };
 
-    if (!typingFinished) {
+    if (!typingFinished && !disableCursor && isActive) {
       startCursorAnimation();
     }
-  }, [typingFinished]);
+  }, [isActive, typingFinished, disableCursor]);
 
   //handle cursor anim stop
   useEffect(() => {
