@@ -25,7 +25,7 @@ const Typewriter = ({
   cursorType = TYPEWRITER_DEFAULT_VALUES.cursorType,
   cursorTextSimpleCustomChar,
   disableCursor = TYPEWRITER_DEFAULT_VALUES.disableCursor,
-  pause,
+  pause = TYPEWRITER_DEFAULT_VALUES.pause,
   onFinish,
 }: TypewriterTextProps) => {
   //constants

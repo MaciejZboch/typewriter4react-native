@@ -191,4 +191,5 @@ export type DefaultTypewriterProps = Required<
     | 'cursorType'
     | 'disableCursor'
   >
->;
+> &
+  Pick<TypewriterTextProps, 'pause'>;

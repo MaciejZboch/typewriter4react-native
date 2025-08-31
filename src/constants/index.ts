@@ -31,4 +31,5 @@ export const TYPEWRITER_DEFAULT_VALUES: DefaultTypewriterProps = {
   typingDelayPerCharVariance: 100,
   cursorType: 'view',
   disableCursor: false,
+  pause: false,
 };
