@@ -10,7 +10,7 @@ Fully compatible with Expo.
 
 ## Update: July 31, 2025
 
-Version: 0.4.2
+Version: 0.5.1
 
 New updates:
 
@@ -81,7 +81,7 @@ const SomeComponent = () => {
 | **cursorType**                 | `'view'` &#124; `'text_simple'`                                                                                                                                                                                                             | Cursor type. `'view'` is customizable; `'text_simple'` is simpler but more limited.                                                                                                                                                                        | `'view'`                                                                                                                                      |
 | **cursorTextSimpleCustomChar** | `string`                                                                                                                                                                                                                                    | Replaces the &#124; string in `text_simple` cursor. Recommended single character.                                                                                                                                                                             | —                                                                                                                                             |
 | **disableCursor**              | `boolean`                                                                                                                                                                                                                                   | If true, the cursor isn't rendered.                                                                                                                                                                                                                        | `false`                                                                                                                                       |
-| **pause** | `boolean` | If true, pauses writing text. Cursor remains (if not disabled). |
+| **pause** | `boolean` | If true, pauses writing text. Cursor remains (if not disabled). | —     |
 
 ## Contributing
 
