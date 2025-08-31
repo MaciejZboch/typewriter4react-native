@@ -33,13 +33,6 @@ const Typewriter = ({
     ? typingDelayPerChar
     : SPEED_VALUES[speed as keyof typeof SPEED_VALUES];
 
-  const effectiveCharDelay =
-    Math.floor(
-      Math.random() *
-        (speedValue - (speedValue - typingDelayPerCharVariance) + 1)
-    ) +
-    (speedValue - typingDelayPerCharVariance);
-
   //styles
   const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
 
@@ -105,7 +98,7 @@ const Typewriter = ({
     return () => clearTimeout(timeout); // Clean up if unmounts
   }, [typingFinished, hideCursorOnFinish]);
 
-  //handle delay
+  //handle startDelay
   useEffect(() => {
     if (!startDelay) {
       setIsWaiting(false);
@@ -132,6 +125,10 @@ const Typewriter = ({
         !pause) || // same as above but for backwardsMode
       (backwards && isActive && !isWaiting && charIndex > 0 && !pause)
     ) {
+      const effectiveCharDelay =
+        Math.floor(Math.random() * (typingDelayPerCharVariance + 1)) +
+        (speedValue - typingDelayPerCharVariance);
+
       const typingTimeout = setTimeout(() => {
         if (!backwards) {
           setDisplayedText(text.slice(0, charIndex + 1));
