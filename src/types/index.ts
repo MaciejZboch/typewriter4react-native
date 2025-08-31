@@ -167,6 +167,12 @@ export interface TypewriterTextProps {
    *
    * @default false */
   disableCursor?: boolean;
+
+  /**
+   * - Pauses writing text. Cursor remains (if not disabled).
+   *
+   * @default false */
+  pause?: boolean;
 }
 
 export type DefaultTypewriterProps = Required<

@@ -25,6 +25,7 @@ const Typewriter = ({
   cursorType = TYPEWRITER_DEFAULT_VALUES.cursorType,
   cursorTextSimpleCustomChar,
   disableCursor = TYPEWRITER_DEFAULT_VALUES.disableCursor,
+  pause,
   onFinish,
 }: TypewriterTextProps) => {
   const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
@@ -120,8 +121,12 @@ const Typewriter = ({
   //handle typing anim
   useEffect(() => {
     if (
-      (!backwards && isActive && !isWaiting && charIndex < text.length) ||
-      (backwards && isActive && !isWaiting && charIndex > 0)
+      (!backwards &&
+        isActive &&
+        !isWaiting &&
+        charIndex < text.length &&
+        !pause) ||
+      (backwards && isActive && !isWaiting && charIndex > 0 && !pause)
     ) {
       const typingTimeout = setTimeout(() => {
         if (!backwards) {
@@ -144,7 +149,7 @@ const Typewriter = ({
       }
     }
     return;
-  }, [charIndex, isActive, isWaiting, backwards]);
+  }, [charIndex, isActive, isWaiting, backwards, pause]);
 
   return (
     <View>
