@@ -8,14 +8,21 @@ Currently the only open-source React Native typewriter that ensures stable conta
 
 Fully compatible with Expo.
 
-## Update: July 27, 2025
+## Update: July 31, 2025
 
-Version: 0.4.1
+Version: 0.4.2
 
 New updates:
 
+- Added 'pause' feature
+- Numerous bugfixes
 - Example app has been updated
-- Readme has been re-formatted
+- Readme has been updated
+
+## Examples
+
+![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/483981355-1c8e0d29-88d2-449f-8807-d73aa753102a.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250831T171207Z&X-Amz-Expires=300&X-Amz-Signature=f534b8467c8b85a19ee477e4cc6cb4e84a4ca32d9aec3d1c0857381a26442e81&X-Amz-SignedHeaders=host)
+![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/483981368-6f6a1310-fc74-421a-a5b4-42a55d317b9e.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250831T171439Z&X-Amz-Expires=300&X-Amz-Signature=02b56ff25e038d65b1c434c2169d6fa249acb36ee9fd124dd643336198f6eff6&X-Amz-SignedHeaders=host)
 
 ## Installation
 
@@ -74,10 +81,11 @@ const SomeComponent = () => {
 | **cursorType**                 | `'view'` &#124; `'text_simple'`                                                                                                                                                                                                             | Cursor type. `'view'` is customizable; `'text_simple'` is simpler but more limited.                                                                                                                                                                        | `'view'`                                                                                                                                      |
 | **cursorTextSimpleCustomChar** | `string`                                                                                                                                                                                                                                    | Replaces the &#124; string in `text_simple` cursor. Recommended single character.                                                                                                                                                                             | —                                                                                                                                             |
 | **disableCursor**              | `boolean`                                                                                                                                                                                                                                   | If true, the cursor isn't rendered.                                                                                                                                                                                                                        | `false`                                                                                                                                       |
+| **pause** | `boolean` | If true, pauses writing text. Cursor remains (if not disabled). |
 
 ## Contributing
 
-Best contact me via GitHub or e-mail if you are willing to contribute.  \\
+Best contact me via GitHub or e-mail if you are willing to contribute.  \
 Some of the planned (or dreamed) additions are listed in the file `toadd.txt` in the root folder of the package repository.
 
 ## License
