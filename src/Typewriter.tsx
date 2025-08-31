@@ -72,10 +72,16 @@ const Typewriter = ({
     if (!typingFinished && !disableCursor && isActive) {
       startCursorAnimation();
     }
+
+    // clean-up when the animation finishes
+    return () => {
+      cursorBlinkAnimation.current?.stop();
+    };
   }, [isActive, typingFinished, disableCursor]);
 
   //handle cursor anim stop
   useEffect(() => {
+    // don't proceed if typing has not finished while cursor is supposed to hide on finish
     if (!(typingFinished && hideCursorOnFinish)) {
       return;
     }
