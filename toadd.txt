@@ -3,9 +3,9 @@ X fix: fix animation delay
 X feat: add options (maybe min-max delay to typing speed variance algorith)
 X feat: add backspace func
 X fix: add showCursor option
-0 fix: fix cursor showing to the side before text runs if alignText === 'center'
+X fix: fix cursor showing to the side before text runs if alignText === 'center'
+X fix: hide cursor if the text is not active (add a prop show cursor, before text animation start)
+X fix: delayStart works only if it's assigned to the first typewriter out of the bunch
 O feat: add queue (text to display after first string is backspaced)
 O feat: add tests
 O feat: add text node handling (to allow mixing styles in one component e.g. w/ differently styled spans)
-0 fix: hide cursor if the text is not active (add a prop show cursor, before text animation start)
-0 fix: delayStart works only if it's assigned to the first typewriter out of the bunch
