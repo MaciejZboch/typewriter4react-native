@@ -28,20 +28,7 @@ const Typewriter = ({
   pause,
   onFinish,
 }: TypewriterTextProps) => {
-  const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
-  const { fontSize } = flatTextStyle;
-
-  const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
-
-  const [displayedText, setDisplayedText] = useState(!backwards ? '' : text);
-  const [charIndex, setCharIndex] = useState(!backwards ? 0 : text.length);
-  const [isWaiting, setIsWaiting] = useState(false);
-  const [typingFinished, setTypingFinished] = useState(false);
-
-  const minCursorOpacity = Number(cursorStyle?.minOpacity ?? 0);
-  const maxCursorOpacity = Number(cursorStyle?.maxOpacity ?? 1);
-  const cursorOpacity = useState(new Animated.Value(minCursorOpacity))[0];
-
+  //constants
   const speedValue: number = typingDelayPerChar
     ? typingDelayPerChar
     : SPEED_VALUES[speed as keyof typeof SPEED_VALUES];
@@ -52,6 +39,22 @@ const Typewriter = ({
         (speedValue - (speedValue - typingDelayPerCharVariance) + 1)
     ) +
     (speedValue - typingDelayPerCharVariance);
+
+  //styles
+  const flatTextStyle = StyleSheet.flatten([DEFAULT_STYLES.text, textStyle]);
+
+  //animation refs
+  const cursorBlinkAnimation = useRef<Animated.CompositeAnimation | null>(null);
+
+  //local state
+  const [displayedText, setDisplayedText] = useState(!backwards ? '' : text);
+  const [charIndex, setCharIndex] = useState(!backwards ? 0 : text.length);
+  const [isWaiting, setIsWaiting] = useState(false);
+  const [typingFinished, setTypingFinished] = useState(false);
+
+  const minCursorOpacity = Number(cursorStyle?.minOpacity ?? 0);
+  const maxCursorOpacity = Number(cursorStyle?.maxOpacity ?? 1);
+  const cursorOpacity = useState(new Animated.Value(minCursorOpacity))[0];
 
   //handle cursors anim start
   useEffect(() => {
@@ -100,7 +103,7 @@ const Typewriter = ({
 
     const timeout = setTimeout(fadeOut, effectiveCursorDisappearDelay);
     return () => clearTimeout(timeout); // Clean up if unmounts
-  }, [typingFinished]);
+  }, [typingFinished, hideCursorOnFinish]);
 
   //handle delay
   useEffect(() => {
@@ -121,11 +124,12 @@ const Typewriter = ({
   //handle typing anim
   useEffect(() => {
     if (
+      // if backwardsMode is off and there is still text to print and there is no pause
       (!backwards &&
         isActive &&
         !isWaiting &&
         charIndex < text.length &&
-        !pause) ||
+        !pause) || // same as above but for backwardsMode
       (backwards && isActive && !isWaiting && charIndex > 0 && !pause)
     ) {
       const typingTimeout = setTimeout(() => {
@@ -199,10 +203,10 @@ const Typewriter = ({
                     <Animated.View
                       style={[
                         {
-                          height: fontSize! * 0.6, // height size lowered for the cursor to not interfere with line height despite position relative
-                          width: fontSize! * 0.1,
+                          height: flatTextStyle.fontSize! * 0.6, // height size lowered for the cursor to not interfere with line height despite position relative
+                          width: flatTextStyle.fontSize! * 0.1,
                           transform: [
-                            { translateX: fontSize! / 3 }, // place it ahead of the text
+                            { translateX: flatTextStyle.fontSize! / 3 }, // place it ahead of the text
                             { scale: 1.75 }, // make it look larger to make-up for the diminished height
                           ],
                           opacity: cursorOpacity,
@@ -219,7 +223,7 @@ const Typewriter = ({
                     <Animated.Text
                       style={[
                         {
-                          fontSize: fontSize!,
+                          fontSize: flatTextStyle.fontSize!,
                           fontWeight: 600,
                           opacity: cursorOpacity,
                           color: cursorStyle?.color
