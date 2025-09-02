@@ -10,7 +10,7 @@ Fully compatible with Expo.
 
 ## Update: July 31, 2025
 
-Version: 0.5.1
+Version: 0.5.2
 
 New updates:
 
@@ -21,7 +21,7 @@ New updates:
 
 ## Examples
 
-![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/483981355-1c8e0d29-88d2-449f-8807-d73aa753102a.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250831T171207Z&X-Amz-Expires=300&X-Amz-Signature=f534b8467c8b85a19ee477e4cc6cb4e84a4ca32d9aec3d1c0857381a26442e81&X-Amz-SignedHeaders=host)
+![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/484635328-e25ce72a-1c12-44b1-9ced-bb131383ad9f.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250902%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250902T150240Z&X-Amz-Expires=300&X-Amz-Signature=9a5e0cb0e47050fa1792c3fda0048cf0acb76b749415a4af20d51b0b503e9b52&X-Amz-SignedHeaders=host)
 ![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/483981368-6f6a1310-fc74-421a-a5b4-42a55d317b9e.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250831T171439Z&X-Amz-Expires=300&X-Amz-Signature=02b56ff25e038d65b1c434c2169d6fa249acb36ee9fd124dd643336198f6eff6&X-Amz-SignedHeaders=host)
 
 ## Installation
