@@ -1,6 +1,6 @@
 {
   "name": "typewriter4react-native",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Customizable typewriter-style text animation component for React Native. Built for smooth, lightweight, and flexible usage in mobile apps.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
