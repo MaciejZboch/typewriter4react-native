@@ -8,9 +8,9 @@ Currently the only open-source React Native typewriter that ensures stable conta
 
 Fully compatible with Expo.
 
-## Update: July 31, 2025
+## Update: September 15, 2025
 
-Version: 0.5.2
+Version: 0.5.3
 
 New updates:
 
@@ -21,8 +21,8 @@ New updates:
 
 ## Examples
 
-![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/484635328-e25ce72a-1c12-44b1-9ced-bb131383ad9f.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250902%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250902T150240Z&X-Amz-Expires=300&X-Amz-Signature=9a5e0cb0e47050fa1792c3fda0048cf0acb76b749415a4af20d51b0b503e9b52&X-Amz-SignedHeaders=host)
-![Example App](https://github-production-user-asset-6210df.s3.amazonaws.com/66899019/483981368-6f6a1310-fc74-421a-a5b4-42a55d317b9e.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250831T171439Z&X-Amz-Expires=300&X-Amz-Signature=02b56ff25e038d65b1c434c2169d6fa249acb36ee9fd124dd643336198f6eff6&X-Amz-SignedHeaders=host)
+![Example App](https://github.com/irolinski/typewriter4react-native/blob/main/docs/assets/example_img_1.gif?raw=true)
+![Example App](https://github.com/irolinski/typewriter4react-native/blob/main/docs/assets/example_img_2.gif?raw=true)
 
 ## Installation
 
